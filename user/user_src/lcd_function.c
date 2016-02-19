@@ -26,13 +26,13 @@ void LCD_Init(void)
 void LCD_GPIO_Config(void)
 {
 	GPIO_InitTypeDef 	GPIO_InitStructure;
-	
+
 	/* Enable FSMC Clock */
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_FSMC, ENABLE);
 
 	/* Enable GPIO Clock*/
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB | RCC_APB2Periph_GPIOD |
-				RCC_APB2Periph_GPIOE, ENABLE);
+							RCC_APB2Periph_GPIOE, ENABLE);
 
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -43,7 +43,7 @@ void LCD_GPIO_Config(void)
 	/* LCD复位控制引脚 */
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1;
 	GPIO_Init(GPIOE, &GPIO_InitStructure);
-	
+
 	/* 配置FSMC相对应的数据线 FSMC-D0~D15: PD 14 15 0 1,PE 7 8 9 10 11 12 13 14 15,PD 8 9 10 */
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -71,7 +71,7 @@ void LCD_FSMC_Config(void)
 {
 	FSMC_NORSRAMInitTypeDef		FSMC_NORSRAMInitStructure;
 	FSMC_NORSRAMTimingInitTypeDef	FSMC_NORSRAMTimingInitStructure;
-	
+
 	FSMC_NORSRAMTimingInitStructure.FSMC_AddressSetupTime = 2;
 	FSMC_NORSRAMTimingInitStructure.FSMC_AddressHoldTime = 0;
 	FSMC_NORSRAMTimingInitStructure.FSMC_DataSetupTime = 5;
@@ -96,7 +96,7 @@ void LCD_FSMC_Config(void)
 	//FSMC_NORSRAMInitStructure.FSMC_AsynchronousWait = FSMC_AsynchronousWait_Disable;
 	FSMC_NORSRAMInitStructure.FSMC_ReadWriteTimingStruct = &FSMC_NORSRAMTimingInitStructure;
 	FSMC_NORSRAMInitStructure.FSMC_WriteTimingStruct = &FSMC_NORSRAMTimingInitStructure;
-	
+
 	FSMC_NORSRAMInit(&FSMC_NORSRAMInitStructure);
 	FSMC_NORSRAMCmd(FSMC_Bank1_NORSRAM1, ENABLE);
 }
@@ -123,13 +123,13 @@ void LCD_REG_Config(void)
 	LCD_ILI9341_Parameter(0x03);
 	LCD_ILI9341_Parameter(0x12);
 	LCD_ILI9341_Parameter(0x81);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xE8);
 	LCD_ILI9341_Parameter(0x85);
 	LCD_ILI9341_Parameter(0x10);
 	LCD_ILI9341_Parameter(0x78);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xCB);
 	LCD_ILI9341_Parameter(0x39);
@@ -137,30 +137,30 @@ void LCD_REG_Config(void)
 	LCD_ILI9341_Parameter(0x00);
 	LCD_ILI9341_Parameter(0x34);
 	LCD_ILI9341_Parameter(0x02);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xF7);
 	LCD_ILI9341_Parameter(0x20);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xEA);
 	LCD_ILI9341_Parameter(0x00);
 	LCD_ILI9341_Parameter(0x00);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xB1);
 	LCD_ILI9341_Parameter(0x00);
 	LCD_ILI9341_Parameter(0x1B);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xB6);
 	LCD_ILI9341_Parameter(0x0A);
 	LCD_ILI9341_Parameter(0xA2);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xC0);
 	LCD_ILI9341_Parameter(0x35);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xC1);
 	LCD_ILI9341_Parameter(0x11);
@@ -177,7 +177,7 @@ void LCD_REG_Config(void)
 
 	LCD_ILI9341_Cmd(0x26);
 	LCD_ILI9341_Parameter(0x01);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xE0);
 	LCD_ILI9341_Parameter(0x0F);
@@ -195,7 +195,7 @@ void LCD_REG_Config(void)
 	LCD_ILI9341_Parameter(0x0F);
 	LCD_ILI9341_Parameter(0x0F);
 	LCD_ILI9341_Parameter(0x00);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0xE1);
 	LCD_ILI9341_Parameter(0x00);
@@ -213,11 +213,11 @@ void LCD_REG_Config(void)
 	LCD_ILI9341_Parameter(0x30);
 	LCD_ILI9341_Parameter(0x38);
 	LCD_ILI9341_Parameter(0x0F);
-	
+
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0x36);
 	LCD_ILI9341_Parameter(0xC8);
-	
+
 	/* column address control set */
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0x2A);
@@ -233,7 +233,7 @@ void LCD_REG_Config(void)
 	LCD_ILI9341_Parameter(0x00);
 	LCD_ILI9341_Parameter(0x01);
 	LCD_ILI9341_Parameter(0x3F);
-	
+
 	/*  Pixel Format Set (3Ah)  */
 	DEBUG_DELAY();
 	LCD_ILI9341_Cmd(0x3A);
@@ -252,7 +252,7 @@ void LCD_REG_Config(void)
 void LCD_Clear(uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint16_t color)
 {
 	uint32_t i = 0;
-	
+
 	LCD_ILI9341_Cmd(0x2A);
 	LCD_ILI9341_Parameter(x >> 8);			//设置x起点坐标
 	LCD_ILI9341_Parameter(x & 0xff);
@@ -281,7 +281,7 @@ void LCD_SetCursur(uint16_t x, uint16_t y)
 	LCD_ILI9341_Parameter(x & 0xff);
 	LCD_ILI9341_Parameter(x >> 8);
 	LCD_ILI9341_Parameter(x & 0xff);
-	
+
 	//设置y坐标
 	LCD_ILI9341_Cmd(0x2B);
 	LCD_ILI9341_Parameter(y >> 8);
@@ -299,7 +299,7 @@ void LCD_SetSize(uint16_t x, uint16_t y, uint16_t width, uint16_t height)
 	LCD_ILI9341_Parameter(x & 0xff);
 	LCD_ILI9341_Parameter((x+width-1) >> 8);
 	LCD_ILI9341_Parameter((x+width-1) & 0xff);
-	
+
 	//设置y坐标
 	LCD_ILI9341_Cmd(0x2B);
 	LCD_ILI9341_Parameter(y >> 8);
@@ -319,7 +319,7 @@ void LCD_SetPoint(uint16_t x, uint16_t y, uint16_t color)	//write point color
 uint16_t LCD_RD_DATA(void)
 {
 	uint16_t R=0, G=0, B=0;
-	
+
 	R = *(volatile uint16_t *)Bank1_LCD_D;
 	R = *(volatile uint16_t *)Bank1_LCD_D;		//read the red color
 	G = *(volatile uint16_t *)Bank1_LCD_D;		//read the green color
@@ -347,7 +347,7 @@ uint8_t GetASCIICode(uint8_t *pBuffer,const uint8_t ascii, FontSize_Type fontsiz
 		default:break;
 	}
 
-	//获取ASCII在字库中的偏移	
+	//获取ASCII在字库中的偏移
 	offset = (ascii - ' ') * Font_Info->ASCII_SIZE;
 
 	//挂载SD卡
@@ -462,7 +462,7 @@ void LCD_DisplayNum(uint16_t x, uint16_t y, uint32_t num, uint16_t color, FontSi
 		LCD_DisplayChar( x+(Font_Info->ASCII_WIDTH*(length--)-Font_Info->ASCII_WIDTH), y, num%10+'0', color, fontsize );
 		num = num / 10;
 	}
-	
+
 }
 
 uint8_t GetGBKCode(uint8_t *pBuffer,const uint8_t *pStr, FontSize_Type fontsize)
@@ -473,7 +473,7 @@ uint8_t GetGBKCode(uint8_t *pBuffer,const uint8_t *pStr, FontSize_Type fontsize)
 
 	GBKH = *pStr;			//取高8位数据
 	GBKL = *(pStr+1);		//取低8位数据
-	
+
 	switch(fontsize)
 	{
 		case SIZE_12:Font_Info = &GBK12_FontInfo;break;
@@ -481,7 +481,7 @@ uint8_t GetGBKCode(uint8_t *pBuffer,const uint8_t *pStr, FontSize_Type fontsize)
 		default:break;
 	}
 
-	//获取汉字在字库中的偏移	
+	//获取汉字在字库中的偏移
 	if(GBKL < 0x7f)
 		offset = ((GBKH - 0x81) * 190 + (GBKL - 0x40)) * (Font_Info->GBK_SIZE * 2);
 	else
@@ -514,7 +514,7 @@ void LCD_DisplayCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t color, 
 	uint8_t buffer[fontsize*2];
 	uint16_t temp;
     CH_FontInfo *Font_Info;
-	
+
 	switch(fontsize)
 	{
 		case SIZE_12:Font_Info = &GBK12_FontInfo;break;
@@ -524,7 +524,7 @@ void LCD_DisplayCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t color, 
 
    	LCD_SetSize(x, y, Font_Info->GBK_WIDTH, Font_Info->GBK_HEIGHT);
 	LCD_ILI9341_Cmd(0x2C);
-	
+
 	if(GetGBKCode(buffer, pStr, fontsize))
 	{
 		for(page = 0; page < Font_Info->GBK_HEIGHT; page++)
@@ -536,12 +536,12 @@ void LCD_DisplayCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t color, 
 			{
 				if(temp & 0x8000)
 					LCD_WR_D(color);
-				else 
+				else
 					LCD_WR_D(BACKGROUND);
 				temp = temp << 1;
 			}
 		}
-	}	
+	}
 }
 
 void LCD_DisplayMultiCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t color, FontSize_Type fontsize)
@@ -557,7 +557,7 @@ void LCD_DisplayMultiCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t co
 
 	while(*pStr != '\0')
 	{
-		
+
 		if(*pStr > 0x7f)			//判断中文字符和英文字符，中文第一个字节从0x81开始
 		{
 			if(x > COLUMN - Font_Info->GBK_WIDTH)		//自动换行
@@ -570,7 +570,7 @@ void LCD_DisplayMultiCH(uint16_t x, uint16_t y, const uint8_t *pStr, uint16_t co
 				y = 0;
 				x = 0;
 			}
-			LCD_DisplayCH(x, y, pStr, color, fontsize); 
+			LCD_DisplayCH(x, y, pStr, color, fontsize);
 			x += Font_Info->GBK_WIDTH;
 			pStr += 2;
 		}

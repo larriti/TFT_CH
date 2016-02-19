@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    FATS/user/user_src/main.c 
+  * @file    FATS/user/user_src/main.c
   * @author  wangxian
   * @version V1.0
   * @date    08-April-2015
@@ -23,11 +23,10 @@ FRESULT res;
   */
 int main(void)
 {
-
-	SD_GPIO_Configuration();	
-	SD_NVIC_Configuration();	
+	SD_GPIO_Configuration();
+	SD_NVIC_Configuration();
 	LCD_Init();
-	LCD_Clear(0, 0, 240, 320, BACKGROUND);	
+	LCD_Clear(0, 0, 240, 320, BACKGROUND);
 	res = f_mount(&fs, "0:", 1);			//挂载SD卡
 	if(res == FR_OK)
 	{
@@ -36,7 +35,8 @@ int main(void)
 	}
 	while (1)
 	{
+
 	}
 }
 
-/******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
+/******************* (C) COPYRIGHT 2015 STMicroelectronics *****END OF FILE****/

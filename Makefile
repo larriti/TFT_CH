@@ -80,5 +80,3 @@ clean:
 	rm -f $(PROJ_NAME).hex
 	rm -f $(PROJ_NAME).bin
 	rm -f $(PROJ_NAME).map
-
-
